@@ -13,15 +13,19 @@ import { StatusBar } from "expo-status-bar";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-export default function Notify() {
+export default function Tracuu() {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
       {/* Background+logo */}
       <View style={styles.background}>
-        <Image style={styles.logo} source={require("../images/Logo2.png")} />
-        <Text style={styles.text1}>Thông báo</Text>
+        <Image
+          style={styles.logo}
+          source={require("../../../assets/images/Logo2.png")}
+        />
+        <Text style={styles.text1}>Tra cứu thông tin</Text>
       </View>
+      {/* Menu */}
     </View>
   );
 }
@@ -41,10 +45,14 @@ const styles = StyleSheet.create({
   logo: {
     position: "absolute",
     resizeMode: "stretch",
-    left: 28,
+    right: "4%",
+    bottom: "10%",
   },
   text1: {
     color: "#fff",
-    fontSize: 20,
+    position: "absolute",
+    fontSize: 22,
+    left: "4%",
+    bottom: "10%",
   },
 });

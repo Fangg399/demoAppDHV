@@ -1,9 +1,7 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import {
-  SafeAreaView,
   StyleSheet,
   Text,
-  TextInput,
   View,
   TouchableOpacity,
   Image,
@@ -11,22 +9,26 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
 
-export default function HomePage({ navigation }) {
+export default function HomePage({ route }) {
+  const data = route.params
+  console.log("data", data);
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
       {/* Background+logo */}
       <View style={styles.background}>
-        <Image style={styles.logo} source={require("../images/Logo2.png")} />
-        <Text style={styles.text1}>TRANG CHỦ</Text>
+        <Image
+          style={styles.logo}
+          source={require("../../../assets/images/Logo2.png")}
+        />
+        <Text style={styles.text1}>SINH VIÊN</Text>
       </View>
       {/* Info */}
       <View style={styles.info}>
         <Image
           style={styles.infoImage}
-          source={require("../images/Info-box.png")}
+          source={require("../../../assets/images/Info-box.png")}
         />
         <View style={styles.infoText}>
           <Text style={styles.text2}>Trần Đình Dũng</Text>
@@ -47,14 +49,14 @@ export default function HomePage({ navigation }) {
             <TouchableOpacity style={styles.box}>
               <Image
                 style={styles.iconImage}
-                source={require("../images/icon1.png")}
+                source={require("../../../assets/images/icon1.png")}
               />
               <Text style={styles.text4}>Xem điểm</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.box}>
               <Image
                 style={styles.iconImage}
-                source={require("../images/icon2.png")}
+                source={require("../../../assets/images/icon2.png")}
               />
               <Text style={styles.text4}>Lịch thi</Text>
             </TouchableOpacity>
@@ -63,14 +65,14 @@ export default function HomePage({ navigation }) {
             <TouchableOpacity style={styles.box}>
               <Image
                 style={styles.iconImage}
-                source={require("../images/icon3.png")}
+                source={require("../../../assets/images/icon3.png")}
               />
               <Text style={styles.text4}>Lớp tín chỉ</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.box}>
               <Image
                 style={styles.iconImage}
-                source={require("../images/icon4.png")}
+                source={require("../../../assets/images/icon4.png")}
               />
               <Text style={styles.text4}>Học liệu</Text>
             </TouchableOpacity>
@@ -185,6 +187,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
+  },
+  iconImage: {
+    resizeMode: "stretch",
+  },
+  text4: {
+    fontSize: 14,
   },
   recruit: {
     width: windowWidth - 30,

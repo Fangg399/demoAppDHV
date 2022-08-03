@@ -19,7 +19,10 @@ export default function Profile({ navigation }) {
       <StatusBar style="light" />
       {/* Background+logo */}
       <View style={styles.background}>
-        <Image style={styles.logo} source={require("../images/Logo2.png")} />
+        <Image
+          style={styles.logo}
+          source={require("../../../assets/images/Logo2.png")}
+        />
         <Text style={styles.text1}>Cá nhân</Text>
       </View>
       {/* Button logout */}
@@ -29,7 +32,7 @@ export default function Profile({ navigation }) {
           navigation.popToTop();
         }}
       >
-        <Text style={styles.text2}>Đăng xuất (test)</Text>
+        <Text style={styles.text2}>Đăng xuất</Text>
       </TouchableOpacity>
     </View>
   );

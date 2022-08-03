@@ -10,11 +10,14 @@ import {
   Dimensions,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
+import axios from "axios";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export default function Login({ navigation }) {
-  const [account, setAccount] = useState("");
+  const [userName, setUserName] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hidePwd, setHidePwd] = useState(true);
   return (
@@ -28,13 +31,17 @@ export default function Login({ navigation }) {
         }}
       >
         <Image
-          source={require("../images/arrow-left.png")}
+          source={require("../../../assets/images/arrow-left.png")}
           resizeMode="stretch"
         />
       </TouchableOpacity>
       {/* Logo+nameUni */}
       <View style={styles.head}>
-        <Image source={require("../images/Logo.png")} resizeMode="stretch" />
+        <Image
+          source={require("../../../assets/images/Logo.png")}
+          resizeMode="stretch"
+          style={{ width: 100, height: 100 }}
+        />
         <View style={styles.nameUniversity}>
           <Text style={styles.text1}>TRƯỜNG ĐẠI HỌC VINH</Text>
           <Text style={styles.text2}>VINH UNIVERSITY</Text>
@@ -46,18 +53,53 @@ export default function Login({ navigation }) {
         <View style={styles.login}>
           <View style={styles.iconBackground}>
             <Image
-              source={require("../images/account.png")}
+              source={require("../../../assets/images/account.png")}
               resizeMode="stretch"
             />
           </View>
-          <TextInput style={styles.input} placeholder="Tên đăng nhập" />
+          <TextInput
+            onChangeText={(value) => setUserName(value)}
+            defaultValue={userName}
+            style={styles.input}
+            placeholder="Tên đăng nhập"
+          />
+        </View>
+        {/* Account */}
+        <View style={styles.login}>
+          <View style={styles.iconBackground}>
+            <Image
+              source={require("../../../assets/images/account.png")}
+              resizeMode="stretch"
+            />
+          </View>
+          <TextInput
+            onChangeText={(value) => setFullName(value)}
+            defaultValue={fullName}
+            style={styles.input}
+            placeholder="Họ và tên"
+          />
+        </View>
+        {/* Account */}
+        <View style={styles.login}>
+          <View style={styles.iconBackground}>
+            <Image
+              source={require("../../../assets/images/account.png")}
+              resizeMode="stretch"
+            />
+          </View>
+          <TextInput
+            onChangeText={(value) => setEmail(value)}
+            defaultValue={email}
+            style={styles.input}
+            placeholder="Email"
+          />
         </View>
         {/* Password */}
         <View style={styles.login}>
           <View style={styles.iconBackground}>
             {
               <Image
-                source={require("../images/password.png")}
+                source={require("../../../assets/images/password.png")}
                 resizeMode="stretch"
               />
             }
@@ -65,6 +107,8 @@ export default function Login({ navigation }) {
           <TextInput
             style={styles.input}
             placeholder="Mật khẩu"
+            onChangeText={(value) => setPassword(value)}
+            defaultValue={password}
             secureTextEntry={hidePwd ? true : false}
           />
           <TouchableOpacity
@@ -74,8 +118,8 @@ export default function Login({ navigation }) {
             <Image
               source={
                 hidePwd
-                  ? require("../images/hide-password.png")
-                  : require("../images/show-password.png")
+                  ? require("../../../assets/images/hide-password.png")
+                  : require("../../../assets/images/show-password.png")
               }
               resizeMode="stretch"
             />
@@ -90,7 +134,21 @@ export default function Login({ navigation }) {
       <TouchableOpacity
         style={styles.buttonLogin}
         onPress={() => {
-          navigation.navigate("HomePage");
+          axios
+            .post("https://sub3.vinhuni.edu.vn/api/Users", {
+              userName: userName,
+              fullName: fullName,
+              email: email,
+              passWord: password,
+              status: 1,
+            })
+            .then((res) => {
+              console.log(res);
+              navigation.navigate("Login");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         }}
       >
         <Text style={styles.text7}>Đăng nhập</Text>
@@ -196,7 +254,7 @@ const styles = StyleSheet.create({
     width: windowWidth - 60,
     height: 60,
     marginLeft: 30,
-    marginTop: 20,
+    marginTop: 80,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 12,
